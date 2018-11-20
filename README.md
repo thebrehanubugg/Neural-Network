@@ -3,7 +3,7 @@
 
 This is a simple Neural Network written in Python. The purpose of this project was to understand the inner workings of a Neural Network and how it works. If you are interested, keep reading.
 
-This project is divided into 3 simple files. There's the *Matrix.py* file, the *Network.py* file, and the *compute.py* file. Here's how they work together:
+This project is divided into 4 simple files. There's the *Matrix.py* file, the *Network.py* file, the *compute.py* file. and the *activation_functions.py* file. Here's how they work together:
 
   *Matrix.py*: This file is the blueprint for what a Matrix datastructure is and how it acts. It is created by using an n-dimensional array based on the specified rows and columns that are fed into it. Here are the operations you can perform on it:
   
@@ -38,5 +38,7 @@ This project is divided into 3 simple files. There's the *Matrix.py* file, the *
     - Train Method: **UPDATE LATER**
     
   *compute.py*: This file is where you initialize your data and pass it through the Neural Network. It is NOT dependent of the *Matrix.py* file, but it IS dependent of the *Network.py* file.
+  
+ *activation_functions.py*: This file have multiple different activation functions including sigmoid, tan, arctan, and gaussian. In the top of the *compute.py* file, include `from activation_function import sigmoid` or whichever activation function you'd like. Then include that same function name as the last argument of `BRAIN = NeuralNetwork(x, y, z, function_name)`. 
   
 This is not meant to be an advanced project, whatsoever. It's just to learn about the inner workings of a Neural Network and how it works. 
