@@ -65,7 +65,7 @@ class Matrix():
                 value = self.data[i][j]
                 result.data[i][j] = func(value)
 
-        return result
+        self.data = result.data
 
     def transpose(self):
         """Convert columns to rows and vice-versa."""
@@ -110,7 +110,7 @@ class Matrix():
                 for j in range(b.cols):
                     result.data[i][j] = self.data[i][j] + b.data[i][j]
 
-            return result
+            self.data = result.data
 
     def subtract(self, b):
         """Element-wise subtraction of two matricies."""
