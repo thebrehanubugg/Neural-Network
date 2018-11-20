@@ -78,6 +78,27 @@ class Matrix():
         result.data.reverse()
         return result
 
+    @staticmethod
+    def to_matrix(arr):
+        """Convert array to Matrix object."""
+        result = Matrix(len(arr), 1)
+
+        for i in enumerate(arr):
+            result.data[i[0]][0] = arr[i[0]]
+
+        return result
+
+    @staticmethod
+    def to_array(matrix):
+        """Convert Matrix object to array."""
+        result = []
+
+        for i in matrix.n_rows:
+            for j in matrix.n_cols:
+                result.append(matrix.data[i][j])
+
+        return result
+
     def add(self, b):
         """Element-wise addition of two matricies."""
         if Matrix.compatibility_error(self, b):
