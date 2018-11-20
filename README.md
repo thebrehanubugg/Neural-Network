@@ -23,6 +23,10 @@ This project is divided into 3 simple files. There's the *Matrix.py* file, the *
     
     - Raise Compatibility Error: raises the error only if Compatibility Error returns True
     
+    - To Matrix: takes an array and creates an **n**x1 Matrix where **n** is the length of the array
+    
+    - To Array: converts the Matrix to an array by making it one dimensional
+    
     - Dot: performs the dot product between two matricies (performs Transpose for you)
 
   *Network.py*: This file is the blueprint for what a Neural Network is and how it works. It is dependent on the *Matrix.py* file in order for it to work. Here are how it works:
