@@ -1,6 +1,5 @@
 """Matrix Class."""
-from random import randint, seed
-seed(1)
+from random import randint
 
 
 class Matrix():
@@ -15,18 +14,38 @@ class Matrix():
         self.n_cols = range(self.cols)
 
         self.data = [[0 for j in self.n_cols] for i in self.n_rows]
+        self.size = "{0}x{1}".format(self.rows, self.cols)
+
+    @staticmethod
+    def random_number():
+        """Return a random number between 0 and 1."""
+        number_range = 1000
+        number = randint(-number_range, number_range)
+        return number / number_range
 
     def randomize(self):
         """Set matrix data to random numbers."""
         for i in self.n_rows:
             for j in self.n_cols:
-                self.data[i][j] = randint(0, 10)
+                self.data[i][j] = Matrix.random_number()
 
     def print(self):
-        """Print out the matrix a in human-readable format."""
-        for row in self.data:
-            print(row)
-        print("\n")
+        """Display Matrix in human-readable format."""
+        for row in self.n_rows:
+            string = ""
+            data = str(self.data[row])
+
+            if self.rows == 1:
+                string += "[" + data + "]"
+            else:
+                if row == 0:
+                    string += "[" + data
+                elif row == self.rows - 1:
+                    string += " " + data + "]"
+                else:
+                    string += " " + data
+
+            print(string)
 
     @staticmethod
     def raise_compatibility_error(a, b, dot=False):
@@ -56,6 +75,18 @@ class Matrix():
             else:
                 return False
 
+    @staticmethod
+    def apply_function(a, func):
+        """Apply a function on the data *STATIC*."""
+        result = Matrix(a.rows, a.cols)
+
+        for i in result.n_rows:
+            for j in result.n_cols:
+                value = a.data[i][j]
+                result.data[i][j] = func(value)
+
+        return result
+
     def map(self, func):
         """Apply a function on the data."""
         result = Matrix(self.rows, self.cols)
@@ -66,6 +97,17 @@ class Matrix():
                 result.data[i][j] = func(value)
 
         self.data = result.data
+
+    def activate(self, func):
+        """Neural Network Activation Function."""
+        result = Matrix(self.rows, self.cols)
+
+        for i in result.n_rows:
+            for j in result.n_cols:
+                value = self.data[i][j]
+                result.data[i][j] = func(value)
+
+        return result
 
     def transpose(self):
         """Convert columns to rows and vice-versa."""
@@ -112,6 +154,22 @@ class Matrix():
 
             self.data = result.data
 
+    def add_scalar(self, x):
+        """Add a scalar number to Matrix."""
+        for i in self.n_rows:
+            for j in self.n_cols:
+                self.data[i][j] += x
+
+    def add_matricies(self, b):
+        """Add two matricies of different sizes."""
+        result = Matrix(self.rows, self.cols)
+
+        for i in self.n_rows:
+            for j in self.n_cols:
+                result.data[i][j] = self.data[i][j] + b.data[0][0]
+
+        self.data = result.data
+
     def subtract(self, b):
         """Element-wise subtraction of two matricies."""
         if Matrix.compatibility_error(self, b):
@@ -126,23 +184,62 @@ class Matrix():
 
             return result
 
+    def sub(self, x):
+        """Scalar subtraction to Matrix."""
+        result = Matrix(self.rows, self.cols)
+
+        for i in self.n_rows:
+            for j in self.n_cols:
+                difference = x - self.data[i][j]
+                result.data[i][j] = difference
+
+        return result
+
+    def scale(self, x):
+        """Scale everything in the Matrix by a scalar number."""
+        result = Matrix(self.rows, self.cols)
+
+        for i in result.n_rows:
+            for j in result.n_cols:
+                result.data[i][j] = self.data[i][j] * x
+
+        return result
+
+    def multiply(self, b):
+        """Multiply two Matricies normally."""
+        if Matrix.compatibility_error(self, b):
+            Matrix.raise_compatibility_error(self, b)
+        else:
+            result = Matrix(self.rows, self.cols)
+
+            for i in self.n_rows:
+                for j in self.n_cols:
+                    result.data[i][j] = self.data[i][j] * b.data[i][j]
+
+            return result
+
     def dot(self, b):
         """Matrix multiplication between two matricies."""
         if Matrix.compatibility_error(self, b, dot=True):
             Matrix.raise_compatibility_error(self, b, dot=True)
         else:
             result = Matrix(self.rows, b.cols)
-            b = b.transpose()
 
-            for i in enumerate(self.data):
-                for j in enumerate(b.data):
-                    products = []
-                    for k in enumerate(i[1]):
-                        product = k[1] * j[1][k[0]]
-                        products.append(product)
+            values = []
 
-                    value = sum(products)
-                    result.data[i[0]][j[0]] = value
+            for i in self.n_rows:
+                for j in b.n_cols:
+                    sum_ = 0
+                    for k in self.n_cols:
+                        one = self.data[i][k]
+                        two = b.data[k][j]
 
-            [i.reverse() for i in result.data]
+                        sum_ += one * two
+
+                    values.append(sum_)
+
+            for i in result.n_rows:
+                for j in result.n_cols:
+                    result.data[i][j] = values[i]
+
             return result
