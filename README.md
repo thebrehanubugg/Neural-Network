@@ -11,13 +11,23 @@ This project is divided into 4 simple files. There's the *Matrix.py* file, the *
     
     - Subtraction: element-wise subtraction of two matricies
     
+    - Sub: subtracts a scalar from a Matrix object (used for Gradient Descent: `1.0 - final_outputs`)
+    
+    - Scale: scales a Matrix by a scalar number (used for learning rate)
+    
     - Map: apply a function that iterates through all of the data points in the Matrix
+    
+    - Apply Function: similar to map, but returns a Matrix object
+    
+    - Activate: pass in activation function, and it applies it to given Matrix
     
     - Transpose: convert the current Matrix to the "sideways" version of it
     
-    - Randomize: initialize the Matrix with random values between 0-10 instead of the 0 default
+    - Random: returns a normalized random number between a -1000 to +1000
     
-    - Print: prints out the matrix in a human-readable format
+    - Randomize: initialize the Matrix with random values using the Random function
+    
+    - Print: prints out the matrix in a human-readable format (similar to Numpy)
     
     - Compatibility Error: error handling to determine if two matricies can be operated on or not
     
@@ -33,12 +43,21 @@ This project is divided into 4 simple files. There's the *Matrix.py* file, the *
   
     - Initialization Method: creates the weights and biases based on the Network size the user passes in (number of input, hidden, and output nodes)
     
-    - Feedforward Method: "feeds" the given input (an array) and flows it through the Network. First it converts the input to an **n**x1 Matrix where **n** is the number of elements in the array. Then it performs the dot product between the hidden weights and the inputs, applies the sigmoid function, and adds the bias. It performs the same operations for the hidden to output, then returns the output.
+    - Feedforward Method: Neural Network feedforward algorithm (read more about it below)
     
-    - Train Method: **UPDATE LATER**
+    - Train Method: Neural Network training algorithm (algorithm description coming later)
     
   *compute.py*: This file is where you initialize your data and pass it through the Neural Network. It is NOT dependent of the *Matrix.py* file, but it IS dependent of the *Network.py* file.
   
- *activation_functions.py*: This file have multiple different activation functions including sigmoid, tan, arctan, and gaussian. In the top of the *compute.py* file, include `from activation_function import sigmoid` or whichever activation function you'd like. Then include that same function name as the last argument of `BRAIN = NeuralNetwork(x, y, z, function_name)`. 
-  
+ *activation_functions.py*: This file have multiple different activation functions including sigmoid, tan, arctan, and gaussian. In the top of the *compute.py* file, include `from activation_function import sigmoid` or whichever activation function you'd like. Then include that same function name as the last argument of `BRAIN = NeuralNetwork(x, y, z, [activation_function, derivative_function])`. 
+
+*Feedforward Algorithm Walkthrough*
+The method ``NeuralNetwork.predict(x)`` expects a parameter for the inputs. This is a one-dimensional array. Here is the code walkthrough.
+
+``inputs = Matrix.to_matrix(inputs_arr)`` converts the given one-dimensional array and creates a Nx1 Matrix where N is the amount of items in the array. If passed in ``[0.275, 0.382, 0.231]``, it would make a 3x1 Matrix.
+
+``hidden_inputs = self.weights_ih.dot(inputs)`` performs the dot product between the weights between the input and hidden, and the given data. The dot product method in the Matrix library returns a Matrix, so it is stored in ``hidden_inputs``.
+
+``hidden_outputs = hidden_inputs.activate(self.activation_function)`` applies the activation function (which is passed in the Neural Network constructor function) on a specified Matrix.
+
 This is not meant to be an advanced project, whatsoever. It's just to learn about the inner workings of a Neural Network and how it works. 
