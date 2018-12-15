@@ -3,25 +3,6 @@ from activation_functions import sigmoid, dsigmoid
 from random import choice
 from Matrix import Matrix
 
-TRAINING_DATA = [
-    {
-        "inputs": [0, 0],
-        "targets": [0]
-    },
-    {
-        "inputs": [1, 0],
-        "targets": [1]
-    },
-    {
-        "inputs": [0, 1],
-        "targets": [1]
-    },
-    {
-        "inputs": [1, 1],
-        "targets": [0]
-    }
-]
-
 
 class NeuralNetwork():
     """Neural Network Class."""
@@ -107,17 +88,3 @@ class NeuralNetwork():
         final_outputs = final_inputs.activate(self.activation_function)
 
         return final_outputs
-
-
-BRAIN = NeuralNetwork(2, 2, 1, [sigmoid, dsigmoid])
-
-for i in range(10000):
-    chosen = choice(TRAINING_DATA)
-
-    x = chosen["inputs"]
-    y = chosen["targets"]
-
-    BRAIN.train(x, y)
-
-Y = BRAIN.predict([0, 0])
-Y.print()
