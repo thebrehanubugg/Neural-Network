@@ -58,6 +58,15 @@ The method ``NeuralNetwork.predict(x)`` expects a parameter for the inputs. This
 
 ``hidden_inputs = self.weights_ih.dot(inputs)`` performs the dot product between the weights between the input and hidden, and the given data. The dot product method in the Matrix library returns a Matrix, so it is stored in ``hidden_inputs``.
 
-``hidden_outputs = hidden_inputs.activate(self.activation_function)`` applies the activation function (which is passed in the Neural Network constructor function) on a specified Matrix.
+``hidden_outputs = hidden_inputs.activate(self.activation_function)`` applies the activation function (which is passed in the Neural Network constructor function) on a specified Matrix. This returns a Matrix, so it is stored in ``hidden_outputs``.
+
+``final_inputs = self.weights_ho.dot(hidden_outputs)`` performs the dot product between the weights between the hidden and output, and the hidden output. The dot product method in the Matrix library returns a Matrix, so it is stored in ``final_inputs``.
+
+``final_outputs = final_inputs.activate(self.activation_function)`` applies the activation function (which is passed in the Neural Network constructor function) on a specified Matrix. This returns a Matrix, so it is stored in ``final_outputs``.
+
+``return final_outputs`` returns the Network's guess! To see the output, do the following:
+
+``Y = NeuralNetwork.predict([0, 0])
+  Y.print()  # [0.002738291]``
 
 This is not meant to be an advanced project, whatsoever. It's just to learn about the inner workings of a Neural Network and how it works. 
