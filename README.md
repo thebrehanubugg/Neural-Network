@@ -11,7 +11,7 @@ This project is divided into 4 simple files. There's the *Matrix.py* file, the *
     
     - Subtraction: element-wise subtraction of two matricies
     
-    - Sub: subtracts a scalar from a Matrix object (used for Gradient Descent: `1.0 - final_outputs`)
+    - Sub: subtracts a scalar from a Matrix object (used for Gradient Descent: 1.0 - final_outputs)
     
     - Scale: scales a Matrix by a scalar number (used for learning rate)
     
@@ -66,7 +66,9 @@ The method ``NeuralNetwork.predict(x)`` expects a parameter for the inputs. This
 
 ``return final_outputs`` returns the Network's guess! To see the output, do the following:
 
-``Y = NeuralNetwork.predict([0, 0])
-  Y.print()  # [0.002738291]``
+```python
+Y = NeuralNetwork.predict([0, 0])
+Y.print()  # [0.002738291]
+```
 
 This is not meant to be an advanced project, whatsoever. It's just to learn about the inner workings of a Neural Network and how it works. 
