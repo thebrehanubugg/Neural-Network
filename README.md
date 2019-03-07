@@ -3,9 +3,9 @@
 
 This is a simple Neural Network written in Python. The purpose of this project was to understand the inner workings of a Neural Network and how it works. If you are interested, keep reading.
 
-This project is divided into 4 simple files. There's the *Matrix.py* file, the *Network.py* file, the *compute.py* file. and the *activation_functions.py* file. Here's how they work together:
+This project is divided into 4 simple files. There's the *Matrix.py* file, the *Network.py* file, the *compute.py* file, and the *activation_functions.py* file. Here's how they work together:
 
-  *Matrix.py*: This file is the blueprint for what a Matrix datastructure is and how it acts. It is created by using an n-dimensional array based on the specified rows and columns that are fed into it. Here are the operations you can perform on it:
+  *Matrix.py*: This file is the blueprint for what a Matrix data structure is and how it acts. It is created by using an n-dimensional array based on the specified rows and columns that are fed into it. Here are the operations you can perform on it:
   
     - Addition: element-wise addition of two matricies
     
